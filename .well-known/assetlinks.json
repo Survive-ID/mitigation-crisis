@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.surviveid.mitigationcrisis",
+      "sha256_cert_fingerprints": [
+        "0D:D7:C3:77:16:AE:AE:20:1E:72:04:BD:D4:0F:7E:EC:FF:33:2C:6B:50:F8:23:BF:9D:35:2B:5F:73:08:0A:64"
+      ]
+    }
+  }
+]
