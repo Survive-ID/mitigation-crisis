@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mitigasi Krisis Indonesia</title>
+    <meta name="description" content="Panduan mitigasi krisis berbasis kondisi pengguna.">
+    <link rel="icon" type="image/png" href="icon.png">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#0a0a0c">
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Header / Progress -->
+        <header id="app-header" class="hidden">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress-fill"></div>
+            </div>
+            <div class="step-indicator">Langkah <span id="current-step">1</span>/6</div>
+        </header>
+
+        <main>
+            <!-- SCREEN 1: SPLASH -->
+            <section id="screen-splash" class="screen active">
+                <div class="splash-content">
+                    <div class="icon-pulse">⚠️</div>
+                    <h1>Mitigasi Krisis<br>Indonesia</h1>
+                    <p class="subtitle">Panduan survival taktis berbasis kondisi nyata Anda.</p>
+
+                    <div class="disclaimer-box">
+                        <h3>DISCLAIMER</h3>
+                        <p>Aplikasi ini memberikan panduan mitigasi krisis berbasis algoritma survival umum. Bukan
+                            pengganti saran medis profesional atau instruksi otoritas resmi (BNPB/SAR).</p>
+                    </div>
+
+                    <button class="btn-primary" onclick="app.nextStep()">MULAI PANDUAN</button>
+                </div>
+            </section>
+
+            <!-- SCREEN 2: JENIS KRISIS -->
+            <section id="screen-crisis" class="screen">
+                <h2>Apa ancaman yang Anda hadapi?</h2>
+                <p class="instruction">Pilih satu atau lebih.</p>
+
+                <div class="grid-options multi-select" id="crisis-options">
+                    <!-- Populated by JS -->
+                </div>
+
+                <div class="action-bar">
+                    <button class="btn-primary" onclick="app.nextStep()">Lanjut</button>
+                </div>
+            </section>
+
+            <!-- SCREEN 3: SKENARIO WAKTU -->
+            <section id="screen-time" class="screen">
+                <button class="btn-back" onclick="app.prevStep()">← Kembali</button>
+                <h2>Berapa lama perkiraan krisis?</h2>
+
+                <div class="list-options single-select" id="time-options">
+                    <!-- Populated by JS -->
+                </div>
+
+                <div class="action-bar">
+                    <button class="btn-primary" onclick="app.nextStep()">Lanjut</button>
+                </div>
+            </section>
+
+            <!-- SCREEN 4: LOKASI -->
+            <section id="screen-location" class="screen">
+                <button class="btn-back" onclick="app.prevStep()">← Kembali</button>
+                <h2>Data Lokasi</h2>
+
+                <div class="form-group">
+                    <label>Lingkungan Tempat Tinggal</label>
+                    <div class="grid-options single-select compact" id="location-type-options">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Iklim Dominan</label>
+                    <div class="grid-options single-select compact" id="climate-options">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+
+                <div class="action-bar">
+                    <button class="btn-primary" onclick="app.nextStep()">Lanjut</button>
+                </div>
+            </section>
+
+            <!-- SCREEN 5: SOSIAL EKONOMI -->
+            <section id="screen-socio" class="screen">
+                <button class="btn-back" onclick="app.prevStep()">← Kembali</button>
+                <h2>Profil Sosial Ekonomi</h2>
+
+                <div class="form-group">
+                    <label>Sumber Penghasilan</label>
+                    <div class="list-options single-select compact" id="income-source-options"></div>
+                </div>
+
+                <div class="form-group">
+                    <label>Tanggungan (Orang)</label>
+                    <div class="number-input">
+                        <button onclick="app.adjustDependents(-1)">-</button>
+                        <span id="dependents-display">1</span>
+                        <button onclick="app.adjustDependents(1)">+</button>
+                    </div>
+                </div>
+
+                <div class="action-bar">
+                    <button class="btn-primary" onclick="app.nextStep()">Lanjut</button>
+                </div>
+            </section>
+
+            <!-- SCREEN 6: SKILL & SUMBER DAYA -->
+            <section id="screen-resources" class="screen">
+                <button class="btn-back" onclick="app.prevStep()">← Kembali</button>
+                <h2>Aset & Kemampuan</h2>
+
+                <div class="form-group">
+                    <label>Skill (Pilih yang dikuasai)</label>
+                    <div class="chip-group" id="skills-options"></div>
+                </div>
+
+                <div class="form-group">
+                    <label>Aset Fisik</label>
+                    <div class="chip-group" id="assets-options"></div>
+                </div>
+
+                <div class="form-group">
+                    <label>Komunitas Sekitar</label>
+                    <div class="list-options single-select compact" id="community-options"></div>
+                </div>
+
+                <div class="action-bar">
+                    <button class="btn-primary" onclick="app.generatePlan()">ANALISIS PANDUAN</button>
+                </div>
+            </section>
+
+            <!-- SCREEN 7: GENERATING -->
+            <section id="screen-generating" class="screen center-content">
+                <div class="scanner-animation"></div>
+                <h2>Menganalisis Situasi...</h2>
+                <p id="generating-text">Mengkalkulasi risiko pangan...</p>
+            </section>
+
+            <!-- SCREEN 8: HASIL -->
+            <section id="screen-result" class="screen">
+                <div class="result-header">
+                    <h1>Rencana Mitigasi</h1>
+                    <div class="badge-group" id="result-badges">
+                        <span class="badge">7 Hari</span>
+                        <span class="badge">Kota</span>
+                    </div>
+                </div>
+
+                <div id="report-content" class="report-container">
+                    <!-- 8 Sections generated by JS -->
+                </div>
+
+                <div class="action-bar sticky">
+                    <button class="btn-secondary" onclick="window.print()">📄 Simpan PDF</button>
+                    <button class="btn-text" onclick="location.reload()">↺ Ulangi</button>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Print Styles are handled by standard CSS print query -->
+    <div id="print-container"></div>
+    </main>
+    </div>
+
+    <!-- Print Only Container -->
+    <div id="print-container"></div>
+
+    <script src="data.js"></script>
+    <script src="script.js"></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js')
+                .then(() => console.log('Service Worker Registered'))
+                .catch(err => console.log('SW Fail:', err));
+        }
+    </script>
+</body>
+
+</html>
