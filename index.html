@@ -182,11 +182,12 @@
     <script src="script.js"></script>
     <script>
         if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('sw.js')
+            navigator.serviceWorker.register('/mitigation-crisis/sw.js')
                 .then(() => console.log('Service Worker Registered'))
                 .catch(err => console.log('SW Fail:', err));
         }
     </script>
 </body>
+
 
 </html>
