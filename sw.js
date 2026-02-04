@@ -1,16 +1,16 @@
 const CACHE_NAME = 'survive-id-v3';
 const ASSETS = [
-    './',
-    './index.html',
-    './styles.css',
-    './script.js',
-    './data.js',
-    './manifest.json',
-    './icon.png',
-    './fonts/Inter-Regular.ttf',
-    './fonts/Inter-Bold.ttf',
-    './fonts/Orbitron-Medium.ttf',
-    './fonts/Orbitron-Bold.ttf'
+    '/mitigation-crisis/',
+    '/mitigation-crisis/index.html',
+    '/mitigation-crisis/styles.css',
+    '/mitigation-crisis/script.js',
+    '/mitigation-crisis/data.js',
+    '/mitigation-crisis/manifest.json',
+    '/mitigation-crisis/icon.png',
+    '/mitigation-crisis/fonts/Inter-Regular.ttf',
+    '/mitigation-crisis/fonts/Inter-Bold.ttf',
+    '/mitigation-crisis/fonts/Orbitron-Medium.ttf',
+    '/mitigation-crisis/fonts/Orbitron-Bold.ttf'
 ];
 
 // Install Event: Cache core assets
@@ -35,6 +35,7 @@ self.addEventListener('activate', (e) => {
             );
         })
     );
+    self.clients.claim();
 });
 
 // Fetch Event: Serve from cache, fall back to network
@@ -47,3 +48,4 @@ self.addEventListener('fetch', (e) => {
         )
     );
 });
+
