@@ -74,8 +74,6 @@ body {
     background-color: var(--bg-dark);
     color: var(--text-main);
     font-family: var(--font-ui);
-    display: flex;
-    justify-content: center;
     min-height: 100vh;
     overflow-x: hidden;
 }
@@ -98,6 +96,7 @@ body::before {
 .app-container {
     width: 100%;
     max-width: 520px;
+    margin: 0 auto;
     background-color: var(--bg-surface);
     display: flex;
     flex-direction: column;
@@ -904,4 +903,22 @@ p {
     accent-color: var(--primary);
     width: 18px;
     height: 18px;
+
+}
+
+.download-wrap {
+    width: 100%;
+    text-align: center;
+    margin: 24px 0;
+}
+
+.download-btn {
+    display: inline-block;
+    padding: 14px 22px;
+    background: #22c55e;
+    color: #000;
+    font-weight: 600;
+    border-radius: 12px;
+    text-decoration: none;
+    max-width: 90%;
 }
